@@ -3,7 +3,7 @@ import random
 
 # Prix associés à chaque coffre
 prix_coffres = {
-    "coffre_argent": 3,
+    "coffre_argent": 2,
     "coffre_or": 5,
     "coffre_diamant": 8
 }
