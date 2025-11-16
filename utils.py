@@ -1,17 +1,13 @@
 def press_enter():
     input("\nAppuie sur Entrée pour continuer...")
 
-
-def ask_choice(prompt, choices):
+def ask_choice(options):
     """
-    prompt : texte à afficher
-    choices : liste de valeurs autorisées (["1","2","3"])
+    Demande au joueur de saisir une option valide.
+    Ne montre pas les options. Si l'entrée est invalide, affiche 'Entrée invalide' et redemande.
     """
-    print(prompt)
-    choix = input("> ")
-
-    while choix not in choices:
-        print("Choix invalide. Réessaie.")
-        choix = input("> ")
-
-    return choix
+    while True:
+        choice = input().strip()
+        if choice in options:
+            return choice
+        print("❌ Entrée invalide, réessaie.")

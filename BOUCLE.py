@@ -3,6 +3,7 @@ from ENNEMI import get_random_enemy
 from Combat import combat
 from choix_cartes import proposer_3_cartes
 from utils import ask_choice, press_enter
+from capa_coffres import appliquer_capacite
 import random
 
 def game_loop():
@@ -20,8 +21,12 @@ def game_loop():
         random.seed(int(seed))
 
     print("=== Bienvenue dans Clash Royale ===")
-    print("Règles : Chaque tour, choisis une carte parmis 3 de ton deck pour combattre l'ennemi. \nSi tu perds, tu recommences depuis zéro.\n")
+    print("Règles : Chaque tour, choisis une carte parmi 3 de ton deck pour combattre l'ennemi.")
+    print("Si tu perds, tu recommences depuis zéro.\n")
     press_enter()
+
+    # Inventaire des bonus acquis
+    bonus_possedes = []
 
     # Boucle infinie d'arènes
     while True:
@@ -44,12 +49,12 @@ def game_loop():
             print(texte)
 
             # 3. Demander le choix du joueur
-            choix = ask_choice("> ", ["1", "2", "3"])
+            choix = ask_choice(["1", "2", "3"])
             carte_choisie = cartes[int(choix) - 1]
             print(f"\nTu as choisi : {carte_choisie['nom']}")
 
-            # 4. Combat
-            vivant = combat(carte_choisie, ennemi)
+            # 4. Combat avec possibilité d'utiliser un bonus
+            vivant = combat(carte_choisie, ennemi, bonus_possedes)
 
             if not vivant:
                 print("\n===== DÉFAITE =====")
@@ -61,6 +66,7 @@ def game_loop():
                 couronnes = data["couronnes"]
                 arene = data["arene"]
                 combats_gagnes_total = 0
+                bonus_possedes = []
 
                 press_enter()
                 break  # redémarre l'arène 1
@@ -68,35 +74,30 @@ def game_loop():
             # 5. Victoire → +1 couronne
             couronnes += 1
             combats_gagnes_total += 1
-            print(f"\nVictoire ! Tu gagnes 1 couronne. Tu en a en tout {couronnes}")
+            print(f"\nVictoire ! Tu gagnes 1 couronne. Total = {couronnes}")
 
             # 6. Aller à la boutique ?
             print("\nSouhaites-tu aller à la boutique ?")
             print("1. Oui")
             print("2. Non")
 
-            rep = ask_choice("> ", ["1", "2"])
+            rep = ask_choice(["1", "2"])
 
             if rep == "1":
                 from Boutique import boutique
-                couronnes, _ = boutique(couronnes)
+                couronnes, nouveaux_bonus = boutique(couronnes)
+                bonus_possedes.extend(nouveaux_bonus)
                 save({"couronnes": couronnes, "arene": arene})
 
             # 7. Sauvegarde immédiate
             save({"couronnes": couronnes, "arene": arene})
 
-        # Si le joueur vient de perdre, on recommence depuis l'arène 1
-        if couronnes == 0 and arene == 1:
-            continue
-
-        # 8. Fin de l'arène → passage à la suivante
-        print(f"\n=== Tu as terminé l'arène {arene} ! ===")
-        arene += 1
-
-        # 8. Sauvegarde
-        save({"couronnes": couronnes, "arene": arene})
-
-        press_enter()
+        # Fin de l'arène → passage à la suivante
+        if couronnes > 0:
+            print(f"\n=== Tu as terminé l'arène {arene} ! ===")
+            arene += 1
+            save({"couronnes": couronnes, "arene": arene})
+            press_enter()
 
 
 # Appel de la boucle principale
