@@ -17,7 +17,7 @@ def charger_coffres(fichier):
 # Afficher les options
 def afficher_boutique():
     print("\n🛒 Boutique")
-    print("1. Coffre Argent : 3 couronnes")
+    print("1. Coffre Argent : 2 couronnes")
     print("2. Coffre Or : 5 couronnes")
     print("3. Coffre Diamant : 8 couronnes")
     print("4. Quitter")
