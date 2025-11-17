@@ -1,7 +1,7 @@
 import json
 import random
 
-def charger_cartes(path="cartes.json"):
+def charger_cartes(path="DATA/cartes.json"):
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data["CARTES"]
@@ -10,7 +10,7 @@ def choisir_sans_doublon(pool, exclus):
     dispo = [c for c in pool if c["nom"] not in exclus]
     return random.choice(dispo)
 
-def proposer_3_cartes(path="cartes.json", seed=None):
+def proposer_3_cartes(path="DATA/cartes.json", seed=None):
     if seed is not None:
         random.seed(seed)
 

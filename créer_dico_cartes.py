@@ -75,6 +75,6 @@ donnees = {
     "COFFRES": coffres
 }
 
-with open("cartes.json", "w", encoding="utf-8") as f:
+with open("DATA/cartes.json", "w", encoding="utf-8") as f:
     json.dump(donnees, f, ensure_ascii=False, indent=4)
 

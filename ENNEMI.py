@@ -1,7 +1,7 @@
 import json
 import random
 
-def get_random_enemy(level=1, path="cartes.json"):
+def get_random_enemy(level=1, path="DATA/cartes.json"):
     # Charger les cartes depuis le JSON
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -17,8 +17,8 @@ def get_random_enemy(level=1, path="cartes.json"):
     # Augmenter les stats selon l'arène
     ennemi = {
         "name": enemy["nom"],
-        "hp": enemy["vie"] + level * 2,    # exemple : +2 HP par arène
-        "atk": enemy["attaque"] + level     # exemple : +1 ATK par arène
+        "hp": enemy["vie"] + (level-1) * 2,    # exemple : +2 HP par arène
+        "atk": enemy["attaque"] + (level-1)     # exemple : +1 ATK par arène
     }
 
     return ennemi

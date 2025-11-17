@@ -1,4 +1,4 @@
-from gestion_joueur import load_save, save, reset_save
+from gestion_joueur import load_save, save, reset_save, creer_joueur
 from ENNEMI import get_random_enemy
 from Combat import combat
 from choix_cartes import proposer_3_cartes
@@ -8,19 +8,17 @@ import random
 
 def game_loop():
 
-    # Charger la sauvegarde
-    data = load_save()
-    couronnes = data["couronnes"]
-    arene = data["arene"]
-
-    # Compteur total de combats gagnés (depuis le début de la partie)
-    combats_gagnes_total = 0
 
     seed = input("Seed ? (laisser vide pour aléatoire)\n> ")
     if seed.strip() != "":
         random.seed(int(seed))
 
-    print("=== Bienvenue dans Clash Royale ===")
+    nom = (input("Nom d'utilisateur :"))
+    creer_joueur(nom)
+    joueur = creer_joueur(nom)
+    save("DATA/joueur.json")
+
+    print(f"=== Bienvenue dans Clash Royale {nom} ===")
     print("Règles : Chaque tour, choisis une carte parmi 3 de ton deck pour combattre l'ennemi.")
     print("Si tu perds, tu recommences depuis zéro.\n")
     press_enter()
@@ -31,8 +29,8 @@ def game_loop():
     # Boucle infinie d'arènes
     while True:
 
-        print(f"\n=== Arène {arene} ===")
-        print(f"Couronnes actuelles : {couronnes}")
+        print(f"\n=== Arène {joueur["arene"]} ===")
+        print(f"Couronnes actuelles : {joueur["couronnes"]}")
 
         # Chaque arène contient 5 combats
         for combat_num in range(1, 6):
@@ -40,7 +38,7 @@ def game_loop():
             print(f"\n--- Combat {combat_num} / 5 ---")
 
             # 1. Générer un ennemi
-            ennemi = get_random_enemy(level=arene)
+            ennemi = get_random_enemy((5*joueur["arene"])-5+combat_num)
             print(f"Un ennemi apparaît : {ennemi['name']} (HP={ennemi['hp']}, ATK={ennemi['atk']})")
 
             # 2. Proposer 3 cartes
@@ -58,23 +56,23 @@ def game_loop():
 
             if not vivant:
                 print("\n===== DÉFAITE =====")
-                print(f"Tu as atteint l'arène {arene}.")
-                print(f"Tu as gagné {combats_gagnes_total} combats au total.")
+                print(f"Tu as atteint l'arène {joueur["arene"]}.")
+                print(f"Tu as gagné {joueur["combats_gagnes_total"]} combats au total.")
 
                 # Reset la sauvegarde
                 data = reset_save()
-                couronnes = data["couronnes"]
-                arene = data["arene"]
-                combats_gagnes_total = 0
+                joueur["couronnes"] = data["couronnes"]
+                joueur["arene"] = data["arene"]
+                joueur["combats_gagnes_total"] = 0
                 bonus_possedes = []
 
                 press_enter()
                 break  # redémarre l'arène 1
 
             # 5. Victoire → +1 couronne
-            couronnes += 1
-            combats_gagnes_total += 1
-            print(f"\nVictoire ! Tu gagnes 1 couronne. Total = {couronnes}")
+            joueur["couronnes"] += 1
+            joueur["combats_gagnes_total"] += 1
+            print(f"\nVictoire ! Tu gagnes 1 couronne. Total = {joueur["couronnes"]}")
 
             # 6. Aller à la boutique ?
             print("\nSouhaites-tu aller à la boutique ?")
@@ -85,18 +83,18 @@ def game_loop():
 
             if rep == "1":
                 from Boutique import boutique
-                couronnes, nouveaux_bonus = boutique(couronnes)
+                couronnes, nouveaux_bonus = boutique(joueur["couronnes"])
                 bonus_possedes.extend(nouveaux_bonus)
-                save({"couronnes": couronnes, "arene": arene})
+                save({"couronnes": couronnes, "arene": joueur["arene"]})
 
             # 7. Sauvegarde immédiate
-            save({"couronnes": couronnes, "arene": arene})
+            save({"couronnes":joueur["couronnes"], "arene": ["arene"]})
 
         # Fin de l'arène → passage à la suivante
-        if couronnes > 0:
-            print(f"\n=== Tu as terminé l'arène {arene} ! ===")
-            arene += 1
-            save({"couronnes": couronnes, "arene": arene})
+        if joueur["couronnes"] > 0:
+            print(f"\n=== Tu as terminé l'arène {["arene"]} ! ===")
+            joueur["arene"] += 1
+            save({"couronnes": ["couronnes"], "arene": ["arene"]})
             press_enter()
 
 

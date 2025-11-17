@@ -30,7 +30,7 @@ def tirer_carte(coffre):
 def boutique(couronnes):
 
     inventaire = []
-    coffres = charger_coffres("cartes.json")
+    coffres = charger_coffres("DATA/cartes.json")
 
     while True:
         print(f"\n Couronnes disponibles : 👑 {couronnes} 👑")
