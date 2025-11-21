@@ -37,7 +37,6 @@ def proposer_3_cartes(path="DATA/cartes.json", seed=None):
          if carte in cartes[r]:
             return r
 
-
     r1 = rarete_de(choix1)
     r2 = rarete_de(choix2)
     r3 = rarete_de(choix3)

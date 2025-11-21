@@ -20,3 +20,12 @@ def reset_save():
     data = {"couronnes": 0, "arene": 1}
     save(data)
     return data
+
+def reset_cartes():
+    with open("DATA/cartes_base.json", "r", encoding="utf-8") as f:
+        base = json.load(f)
+
+    with open("DATA/cartes.json", "w", encoding="utf-8") as f:
+        json.dump(base, f, indent=4, ensure_ascii=False)
+
+

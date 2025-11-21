@@ -1,51 +1,99 @@
+# Toutes les capacités des sorts et bâtiments
+# Bonus selon l'arène ( pour suivre croissance jeu )
+def bonus_par_arene(arene):
+    return arene
 
-def appliquer_capacite(objet, ennemi, batiments_actifs):
-    """
-    Applique l'effet d'un sort ou d'un batiment sur l'ennemi ou sur le joueur.
-    - objet: dictionnaire {nom, type, rarete, capacite}
-    - ennemi: dictionnaire {name, hp, atk}
-    - batiments_actifs: liste de batiments posés
-    """
-    nom = objet['nom']
-    typ = objet['type']
+# Les sorts
+def Gel(carte, ennemi, combat_state, arene=0):
+    ennemi['gel'] = 1
+    print("L'ennemi est gelé pour un tour !")
 
-    if typ == "sort":
-        if nom == "Gel":
-            # Gèle l'ennemi pendant 1 tour (pas d'attaque ce tour)
-            ennemi['gel'] = True
-            print("L'ennemi est gelé pour ce tour !")
-        elif nom == "Poison":
-            # Inflige 5 dégâts par tour pendant 3 tours
-            ennemi['poison'] = 3
-            print("️ L'ennemi est empoisonné pendant 3 tours !")
-        elif nom == "Heal potion":
-            # Rend 10 PV à la carte jouée (gérer dans combat)
-            print(" Tu récupères 10 PV sur ta carte !")
-            # retourner un signal pour combat.py
-            return {"heal":10}
-        elif nom == "Roquette":
-            # Tue l'ennemi instantanément
-            ennemi['hp'] = 0
-            print("💥 ROQUETTE ! L'ennemi est détruit instantanément !")
+def Poison(carte, ennemi, combat_state, arene=0):
+    dmg = 3 + bonus_par_arene(arene)
+    ennemi['poison'] = 3
+    ennemi['poison_dmg'] = dmg
+    print(f'Poison : {dmg} dégâts par tour pendant 3 tours !')
 
-    elif typ == "batiment":
-        if nom == "Canon":
-            # Augmente l'attaque +2 chaque tour
-            batiments_actifs.append(objet)
-            print(" Canon posé ! +2 ATK à chaque attaque.")
-        elif nom == "Pierre tombale":
-            # Effet spécial géré dans combat (spawn squelette si mort)
-            batiments_actifs.append(objet)
-            print("️ Pierre tombale posée ! Si tu meurs, un squelette inflige 5 dégâts.")
-        elif nom == "Cabane de gobelins":
-            batiments_actifs.append(objet)
-            print(" Cabane de gobelins posée ! +2 ATK chaque attaque.")
-        elif nom == "Mortier":
-            batiments_actifs.append(objet)
-            print(" Mortier posé ! +1 ATK chaque attaque.")
-        elif nom == "Tesla":
-            batiments_actifs.append(objet)
-            print("⚡ Tesla posée ! +3 ATK chaque attaque.")
-        elif nom == "Tour de l'Enfer":
-            batiments_actifs.append(objet)
-            print(" Tour de l'Enfer posée ! +5 ATK chaque attaque.")
+def Heal_potion(carte, ennemi, combat_state, arene=0):
+    heal = 10 + 2*bonus_par_arene(arene)
+    combat_state['heal'] = heal
+    print(f'Heal Potion : tu récupères {heal} PV !')
+
+def Foudre(carte, ennemi, combat_state, arene=0):
+    dmg = 5 + bonus_par_arene(arene)
+    ennemi['hp'] -= dmg
+    print(f'Foudre : {dmg} dégâts instantanés !')
+
+def Rage(carte, ennemi, combat_state, arene=0):
+    combat_state['rage'] = 1.5
+    print('Rage : tes attaques sont augmentées de 50% pour ce combat !')
+
+def Roquette(carte, ennemi, combat_state, arene=0):
+    ennemi['hp'] = 0
+    print('Roquette : ennemi instantanément éliminé !')
+
+# Les batiments
+def Canon(carte, ennemi, combat_state, arene=0):
+    bonus = 2 + bonus_par_arene(arene)
+    combat_state['bonus_atk'] += bonus
+    print(f'Canon : +{bonus} ATK chaque tour.')
+
+def Mortier(carte, ennemi, combat_state, arene=0):
+    bonus = 1 + bonus_par_arene(arene)
+    combat_state['bonus_atk'] += bonus
+    print(f'Mortier : +{bonus} ATK chaque tour.')
+
+def Tesla(carte, ennemi, combat_state, arene=0):
+    bonus = 3 + bonus_par_arene(arene)
+    combat_state['bonus_atk'] += bonus
+    ennemi['atk'] = max(0, ennemi['atk']//2)
+    print(f'⚡ Tesla : +{bonus} ATK et l\'ennemi perd 50% d\'attaque.')
+
+def Tour_de_l_Enfer(carte, ennemi, combat_state, arene=0):
+    if 'tour_enfer_bonus' not in combat_state:
+        combat_state['tour_enfer_bonus'] = 5 + bonus_par_arene(arene)
+    else:
+        combat_state['tour_enfer_bonus'] *= 1.5
+    combat_state['bonus_atk'] += combat_state['tour_enfer_bonus']
+    print(f'Tour de l\'Enfer : +{combat_state["tour_enfer_bonus"]:.1f} ATK ce tour (x1,5 chaque tour)')
+
+def Cabane_de_gobelins(carte, ennemi, combat_state, arene=0):
+    bonus = 2 + bonus_par_arene(arene)
+    combat_state['bonus_atk'] += bonus
+    print(f'Cabane : +{bonus} ATK, 3 gobelins t\'aident.')
+
+def Pierre_tombale(carte, ennemi, combat_state, arene=0):
+    dmg = 5 + bonus_par_arene(arene)
+    combat_state['tombstone'] = dmg
+    print(f'Pierre tombale : si tu meurs, un squelette inflige {dmg} dégâts.')
+
+# Crée un état de combat initial
+def creer_etat_combat():
+    return {
+        'bonus_atk':0,
+        'rage':1.0,
+        'inferno':1.0,
+        'poison':0,
+        'poison_dmg':0,
+        'gel':0,
+        'heal':0,
+        'tombstone':0,
+        'tour_enfer_bonus': None
+    }
+
+# faire le dictionnaire
+CAPACITES = {
+    'Gel': Gel,
+    'Poison': Poison,
+    'Heal potion': Heal_potion,
+    'Foudre': Foudre,
+    'Rage': Rage,
+    'Roquette': Roquette,
+    'Canon': Canon,
+    'Mortier': Mortier,
+    'Tesla': Tesla,
+    "Tour de l'Enfer": Tour_de_l_Enfer,
+    'Cabane de gobelins': Cabane_de_gobelins,
+    'Pierre tombale': Pierre_tombale,
+}
+

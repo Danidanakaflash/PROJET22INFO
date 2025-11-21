@@ -1,26 +1,23 @@
-from gestion_joueur import load_save, save, reset_save, creer_joueur
+from gestion_joueur import save, reset_save, creer_joueur, reset_cartes
 from ENNEMI import get_random_enemy
 from Combat import combat
+from Boutique import boutique, bonus
 from choix_cartes import proposer_3_cartes
-from utils import ask_choice, press_enter
-from capa_coffres import appliquer_capacite
+from utils import ask_choice, press_enter, intro
 import random
 
 def game_loop():
-
+    reset_cartes()
 
     seed = input("Seed ? (laisser vide pour aléatoire)\n> ")
     if seed.strip() != "":
         random.seed(int(seed))
 
     nom = (input("Nom d'utilisateur :"))
-    creer_joueur(nom)
     joueur = creer_joueur(nom)
     save("DATA/joueur.json")
 
-    print(f"=== Bienvenue dans Clash Royale {nom} ===")
-    print("Règles : Chaque tour, choisis une carte parmi 3 de ton deck pour combattre l'ennemi.")
-    print("Si tu perds, tu recommences depuis zéro.\n")
+    intro(nom)
     press_enter()
 
     # Inventaire des bonus acquis
@@ -34,7 +31,6 @@ def game_loop():
 
         # Chaque arène contient 5 combats
         for combat_num in range(1, 6):
-
             print(f"\n--- Combat {combat_num} / 5 ---")
 
             # 1. Générer un ennemi
@@ -74,18 +70,19 @@ def game_loop():
             joueur["combats_gagnes_total"] += 1
             print(f"\nVictoire ! Tu gagnes 1 couronne. Total = {joueur["couronnes"]}")
 
+            #bonus supplémentaire à choisir :
+            bonus(joueur)
+
             # 6. Aller à la boutique ?
             print("\nSouhaites-tu aller à la boutique ?")
             print("1. Oui")
             print("2. Non")
-
             rep = ask_choice(["1", "2"])
 
             if rep == "1":
-                from Boutique import boutique
                 couronnes, nouveaux_bonus = boutique(joueur["couronnes"])
                 bonus_possedes.extend(nouveaux_bonus)
-                save({"couronnes": couronnes, "arene": joueur["arene"]})
+                #ajoute les éléments d'une liste à une autre
 
             # 7. Sauvegarde immédiate
             save({"couronnes":joueur["couronnes"], "arene": ["arene"]})
