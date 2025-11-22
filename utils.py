@@ -8,7 +8,7 @@ def ask_choice(options):
         choice = input().strip()
         if choice in options:
             return choice
-        print("❌ Entrée invalide, réessaie.")
+        print("❌ Entrée invalide, choisis un nombre de la liste.")
 
 def intro(nom):
     print(f"=== Bienvenue dans Clash Royale {nom} ===")

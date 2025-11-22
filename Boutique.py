@@ -1,6 +1,5 @@
 import random
 import json
-
 from utils import ask_choice
 
 # Prix associés à chaque coffre
@@ -16,14 +15,13 @@ def charger_coffres(fichier):
         data = json.load(f)
         return data["COFFRES"]
 
-
 # Afficher les options
 def afficher_boutique():
 
     print("\n🛒 Boutique")
     print("1. Coffre Argent : 2 couronnes")
-    print("2. Coffre Or : 5 couronnes")
-    print("3. Coffre Diamant : 8 couronnes")
+    print("2. Coffre Or : 4 couronnes")
+    print("3. Coffre Diamant : 6 couronnes")
     print("4. Quitter")
 
 # Tirer une carte aléatoire

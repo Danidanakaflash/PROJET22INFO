@@ -3,16 +3,10 @@ import os
 
 SAVE_PATH = "../Cartes/save.json"
 
-def load_save(fichier):
-    with open(fichier, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data
-
 def creer_joueur(nom):
     return {'nom':nom, 'couronnes': 0, "arene": 1, "combats_gagnes_total": 0}
 
 def save(data):
-    os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)  # Crée le dossier si inexistant
     with open(SAVE_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
