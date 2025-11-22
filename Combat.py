@@ -84,14 +84,14 @@ def combat(carte, ennemi, bonus_possedes, arene=0):
 
             choix = ask_choice(['1', '2', '3'])
 
-            # 1 — ATTAQUER
+            # 1 ATTAQUER
             if choix == '1':
                 dmg = calculer_degats_joueur(carte_atk, combat_state)
                 ennemi['hp'] -= dmg
                 print(f"Tu infliges {dmg} dégâts !")
                 action_faite = True
 
-            # 2 — SORT
+            # 2 SORT
             elif choix == '2':
                 if not sorts:
                     print("Aucun sort disponible. Choisis une autre action.")
@@ -109,7 +109,7 @@ def combat(carte, ennemi, bonus_possedes, arene=0):
 
                 action_faite = True
 
-            # 3 — BÂTIMENT
+            # 3 BÂTIMENT
             elif choix == '3':
                 if not batiments:
                     print("Aucun bâtiment disponible. Choisis une autre action.")

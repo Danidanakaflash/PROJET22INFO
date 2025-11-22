@@ -34,8 +34,8 @@ def game_loop():
             print(f"\n--- Combat {combat_num} / 5 ---")
 
             # 1. Générer un ennemi
-            ennemi = get_random_enemy((5*joueur["arene"])-5+combat_num)
-            print(f"Un ennemi apparaît : {ennemi['name']} (HP={ennemi['hp']}, ATK={ennemi['atk']})")
+            ennemi = get_random_enemy((joueur["arene"]))
+            print(f"Un ennemi apparaît : {ennemi['name']}, vie : {ennemi['hp']}, attaque : {ennemi['atk']}")
 
             # 2. Proposer 3 cartes
             texte, cartes = proposer_3_cartes()
@@ -45,7 +45,6 @@ def game_loop():
             # 3. Demander le choix du joueur
             choix = ask_choice(["1", "2", "3"])
             carte_choisie = cartes[int(choix) - 1]
-            print(f"\nTu as choisi : {carte_choisie['nom']}")
 
             # 4. Combat avec possibilité d'utiliser un bonus
             vivant = combat(carte_choisie, ennemi, bonus_possedes)

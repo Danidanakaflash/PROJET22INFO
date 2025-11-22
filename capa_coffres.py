@@ -9,24 +9,24 @@ def Gel(carte, ennemi, combat_state, arene=0):
     print("L'ennemi est gelé pour un tour !")
 
 def Poison(carte, ennemi, combat_state, arene=0):
-    dmg = 3 + bonus_par_arene(arene)
+    dmg = 6 + 2*bonus_par_arene(arene)
     ennemi['poison'] = 3
     ennemi['poison_dmg'] = dmg
     print(f'Poison : {dmg} dégâts par tour pendant 3 tours !')
 
 def Heal_potion(carte, ennemi, combat_state, arene=0):
-    heal = 10 + 2*bonus_par_arene(arene)
+    heal = 12 + 2*bonus_par_arene(arene)
     combat_state['heal'] = heal
     print(f'Heal Potion : tu récupères {heal} PV !')
 
 def Foudre(carte, ennemi, combat_state, arene=0):
-    dmg = 5 + bonus_par_arene(arene)
+    dmg = 15 + 2*bonus_par_arene(arene)
     ennemi['hp'] -= dmg
     print(f'Foudre : {dmg} dégâts instantanés !')
 
 def Rage(carte, ennemi, combat_state, arene=0):
-    combat_state['rage'] = 1.5
-    print('Rage : tes attaques sont augmentées de 50% pour ce combat !')
+    combat_state['rage'] = 1.75
+    print('Rage : tes attaques sont augmentées de 75% pour ce combat !')
 
 def Roquette(carte, ennemi, combat_state, arene=0):
     ennemi['hp'] = 0
@@ -34,12 +34,12 @@ def Roquette(carte, ennemi, combat_state, arene=0):
 
 # Les batiments
 def Canon(carte, ennemi, combat_state, arene=0):
-    bonus = 2 + bonus_par_arene(arene)
+    bonus = 6 + 2*bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     print(f'Canon : +{bonus} ATK chaque tour.')
 
 def Mortier(carte, ennemi, combat_state, arene=0):
-    bonus = 1 + bonus_par_arene(arene)
+    bonus = 5 + 2*bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     print(f'Mortier : +{bonus} ATK chaque tour.')
 
@@ -47,7 +47,7 @@ def Tesla(carte, ennemi, combat_state, arene=0):
     bonus = 3 + bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     ennemi['atk'] = max(0, ennemi['atk']//2)
-    print(f'⚡ Tesla : +{bonus} ATK et l\'ennemi perd 50% d\'attaque.')
+    print(f' Tesla : +{bonus} ATK et l\'ennemi perd 50% d\'attaque.')
 
 def Tour_de_l_Enfer(carte, ennemi, combat_state, arene=0):
     if 'tour_enfer_bonus' not in combat_state:
@@ -58,7 +58,7 @@ def Tour_de_l_Enfer(carte, ennemi, combat_state, arene=0):
     print(f'Tour de l\'Enfer : +{combat_state["tour_enfer_bonus"]:.1f} ATK ce tour (x1,5 chaque tour)')
 
 def Cabane_de_gobelins(carte, ennemi, combat_state, arene=0):
-    bonus = 2 + bonus_par_arene(arene)
+    bonus = 4 + bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     print(f'Cabane : +{bonus} ATK, 3 gobelins t\'aident.')
 

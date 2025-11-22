@@ -1,231 +1,126 @@
 {
-    "CARTES": {
-        "commune": [
-            {
-                "nom": "Gang de gobelins",
-                "attaque": 7,
-                "vie": 11
-            },
-            {
-                "nom": "Archers",
-                "attaque": 8,
-                "vie": 10
-            },
-            {
-                "nom": "Chevalier",
-                "attaque": 9,
-                "vie": 12
-            },
-            {
-                "nom": "Horde de gargouilles",
-                "attaque": 7,
-                "vie": 11
-            },
-            {
-                "nom": "Barbares",
-                "attaque": 8,
-                "vie": 12
-            },
-            {
-                "nom": "Recrues royales",
-                "attaque": 7,
-                "vie": 13
-            },
-            {
-                "nom": "Squelettes",
-                "attaque": 6,
-                "vie": 10
-            },
-            {
-                "nom": "Esprit de glace",
-                "attaque": 7,
-                "vie": 11
-            },
-            {
-                "nom": "Artificière",
-                "attaque": 8,
-                "vie": 12
-            }
-        ],
-        "rare": [
-            {
-                "nom": "Sorcier de feu",
-                "attaque": 8,
-                "vie": 12
-            },
-            {
-                "nom": "Mini Pekka",
-                "attaque": 9,
-                "vie": 13
-            },
-            {
-                "nom": "Valkyrie",
-                "attaque": 8,
-                "vie": 14
-            },
-            {
-                "nom": "Chevaucheur de cochon",
-                "attaque": 9,
-                "vie": 13
-            },
-            {
-                "nom": "Mousquetaire",
-                "attaque": 8,
-                "vie": 12
-            },
-            {
-                "nom": "Gobelin à sarbacane",
-                "attaque": 7,
-                "vie": 11
-            }
-        ],
-        "epique": [
-            {
-                "nom": "Prince",
-                "attaque": 9,
-                "vie": 14
-            },
-            {
-                "nom": "Géant squelette",
-                "attaque": 8,
-                "vie": 15
-            },
-            {
-                "nom": "Sorcière",
-                "attaque": 8,
-                "vie": 13
-            },
-            {
-                "nom": "Dragon électrique",
-                "attaque": 9,
-                "vie": 14
-            }
-        ],
-        "legendaire": [
-            {
-                "nom": "Phoenix",
-                "attaque": 10,
-                "vie": 15
-            },
-            {
-                "nom": "Fantôme",
-                "attaque": 9,
-                "vie": 14
-            },
-            {
-                "nom": "Méga-chevalier",
-                "attaque": 10,
-                "vie": 16
-            }
-        ],
-        "champions": [
-            {
-                "nom": "Reine des archers",
-                "attaque": 11,
-                "vie": 16
-            },
-            {
-                "nom": "Chevalier d’or",
-                "attaque": 10,
-                "vie": 15
-            },
-            {
-                "nom": "Géant royal champion",
-                "attaque": 11,
-                "vie": 17
-            }
-        ]
-    },
-    "COFFRES": {
-        "coffre_or": [
-            {
-                "nom": "Cabane de gobelins",
-                "type": "batiment",
-                "rarete": "rare",
-                "attaque": 3,
-                "capacite": "3 gobelins apparaissent et t'aide à combattre l'ennemi"
-            },
-            {
-                "nom": "Pierre tombale",
-                "type": "batiment",
-                "rarete": "épique",
-                "attaque": 5,
-                "capacite": "si l'ennemi te vainc, un squellette apparait et abbat un coup fatal, si l'ennemi meurt, tu réapparait"
-            },
-            {
-                "nom": "Heal potion",
-                "type": "sort",
-                "rarete": "rare",
-                "attaque": 0,
-                "capacite": "soigne ta carte "
-            },
-            {
-                "nom": "Poison",
-                "type": "sort",
-                "rarete": "epique",
-                "attaque": 3,
-                "capacite": "empoisonne l'ennemi et inflige des dégats pendant 3 tours"
-            }
-        ],
-        "coffre_argent": [
-            {
-                "nom": "Canon",
-                "type": "batiment",
-                "rarete": "commune",
-                "attaque": 2,
-                "capacite": "tire sur l'ennemi à chaque tour"
-            },
-            {
-                "nom": "Mortier",
-                "type": "batiment",
-                "rarete": "commune",
-                "attaque": 4,
-                "capacite": "tire sur l'ennemi tout les deux tours et inflige de lourds dégats"
-            },
-            {
-                "nom": "Gel",
-                "type": "sort",
-                "rarete": "epique",
-                "attaque": 0,
-                "capacite": "gel l'ennemi pour un tour"
-            },
-            {
-                "nom": "Rage",
-                "type": "sort",
-                "rarete": "commune",
-                "attaque": 0,
-                "capacite": "augmente de 50% tes attaques pour le combat"
-            }
-        ],
-        "coffre_diamant": [
-            {
-                "nom": "Tesla",
-                "type": "batiment",
-                "rarete": "epique",
-                "attaque": 3,
-                "capacite": "électrocute l'ennemi en lui enlevant 50% d'attaque"
-            },
-            {
-                "nom": "Tour de l'Enfer",
-                "type": "batiment",
-                "rarete": "legendaire",
-                "attaque": 3,
-                "capacite": "chaque tour inflige des dégats et se multiplie par 1,5"
-            },
-            {
-                "nom": "Foudre",
-                "type": "sort",
-                "rarete": "epique",
-                "attaque": 5,
-                "capacite": "l'ennemi se fait foudroyer"
-            },
-            {
-                "nom": "Roquette",
-                "type": "sort",
-                "rarete": "legendaire",
-                "attaque": 0,
-                "capacite": "tue l'ennemi instantanément"
-            }
-        ]
-    }
+  "CARTES": {
+    "commune": [
+      {"nom": "Gang de gobelins", "attaque": 7, "vie": 23},
+      {"nom": "Archers", "attaque": 8, "vie": 22},
+      {"nom": "Chevalier", "attaque": 9, "vie": 24},
+      {"nom": "Horde de gargouilles", "attaque": 7, "vie": 23},
+      {"nom": "Barbares", "attaque": 8, "vie": 24},
+      {"nom": "Recrues royales", "attaque": 7, "vie": 25},
+      {"nom": "Squelettes", "attaque": 6, "vie": 22},
+      {"nom": "Esprit de glace", "attaque": 7, "vie": 23},
+      {"nom": "Artificière", "attaque": 8, "vie": 24}
+    ],
+    "rare": [
+      {"nom": "Sorcier de feu", "attaque": 8, "vie": 25},
+      {"nom": "Mini Pekka", "attaque": 9, "vie": 26},
+      {"nom": "Valkyrie", "attaque": 8, "vie": 27},
+      {"nom": "Chevaucheur de cochon", "attaque": 9, "vie": 26},
+      {"nom": "Mousquetaire", "attaque": 8, "vie": 25},
+      {"nom": "Gobelin à sarbacane", "attaque": 9, "vie": 24}
+    ],
+    "epique": [
+      {"nom": "Prince", "attaque": 9, "vie": 27},
+      {"nom": "Géant squelette", "attaque": 8, "vie": 28},
+      {"nom": "Sorcière", "attaque": 10, "vie": 26},
+      {"nom": "Dragon électrique", "attaque": 9, "vie": 27}
+    ],
+    "legendaire": [
+      {"nom": "Phoenix", "attaque": 10, "vie": 29},
+      {"nom": "Fantôme", "attaque": 12, "vie": 28},
+      {"nom": "Méga-chevalier", "attaque": 11, "vie": 30}
+    ]
+  },
+  "COFFRES": {
+    "coffre_or": [
+      {
+        "nom": "Cabane de gobelins",
+        "type": "batiment",
+        "rarete": "rare",
+        "attaque": 3,
+        "capacite": "3 gobelins apparaissent et aident à combattre l'ennemi"
+      },
+      {
+        "nom": "Pierre tombale",
+        "type": "batiment",
+        "rarete": "epique",
+        "attaque": 5,
+        "capacite": "si l'ennemi te vainc, un squelette frappe l'ennemi"
+      },
+      {
+        "nom": "Heal potion",
+        "type": "sort",
+        "rarete": "rare",
+        "attaque": 0,
+        "capacite": "soigne ta carte de 10 PV"
+      },
+      {
+        "nom": "Poison",
+        "type": "sort",
+        "rarete": "epique",
+        "attaque": 3,
+        "capacite": "empoisonne l'ennemi, 5 dégâts par tour pendant 3 tours"
+      }
+    ],
+    "coffre_argent": [
+      {
+        "nom": "Canon",
+        "type": "batiment",
+        "rarete": "commune",
+        "attaque": 2,
+        "capacite": "tire sur l'ennemi à chaque tour"
+      },
+      {
+        "nom": "Mortier",
+        "type": "batiment",
+        "rarete": "commune",
+        "attaque": 4,
+        "capacite": "tire sur l'ennemi tous les deux tours et inflige de lourds dégâts"
+      },
+      {
+        "nom": "Gel",
+        "type": "sort",
+        "rarete": "epique",
+        "attaque": 0,
+        "capacite": "gèle l'ennemi pour un tour"
+      },
+      {
+        "nom": "Rage",
+        "type": "sort",
+        "rarete": "commune",
+        "attaque": 0,
+        "capacite":"augmente de 50% les attaques de ta carte pendant le combat"
+      }
+    ],
+    "coffre_diamant": [
+      {
+        "nom": "Tesla",
+        "type": "batiment",
+        "rarete": "epique",
+        "attaque": 3,
+        "capacite": "électrocute l'ennemi en lui enlevant 50% d'attaque"
+      },
+      {
+        "nom": "Tour de l'Enfer",
+        "type": "batiment",
+        "rarete": "legendaire",
+        "attaque": 3,
+        "capacite": "chaque tour inflige des dégâts et se multiplie par 1,5"
+      },
+      {
+        "nom": "Foudre",
+        "type": "sort",
+        "rarete": "epique",
+        "attaque": 5,
+        "capacite": "l'ennemi se fait foudroyer"
+      },
+      {
+        "nom": "Roquette",
+        "type": "sort",
+        "rarete": "legendaire",
+        "attaque": 0,
+        "capacite": "tue l'ennemi instantanément"
+      }
+    ]
+  }
 }

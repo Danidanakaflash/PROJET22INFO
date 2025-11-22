@@ -1,13 +1,13 @@
 import random
 import json
-from utils import ask_choice
+
 from utils import ask_choice
 
 # Prix associés à chaque coffre
 prix_coffres = {
     "coffre_argent": 2,
-    "coffre_or": 5,
-    "coffre_diamant": 8
+    "coffre_or": 4,
+    "coffre_diamant": 6
 }
 
 # Charger les coffres depuis cartes.json

@@ -1,24 +1,47 @@
 import json
 import random
 
-def get_random_enemy(level=1, path="DATA/cartes.json"):
+def get_random_enemy(arene, path="DATA/cartes.json"):
+    """
+    Tire un ennemi aléatoire dans le JSON, détermine sa rareté,
+    colore son nom et sa rareté, et augmente ses stats selon l'arène.
+    """
+    # Codes ANSI pour couleurs selon rareté
+    COULEURS_RARETE = {
+        "commune": "\033[34m",    # bleu
+        "rare": "\033[33m",       # orange
+        "epique": "\033[35m",     # violet
+        "legendaire": "\033[31m"  # rouge
+    }
+    RESET = "\033[0m"
+
     # Charger les cartes depuis le JSON
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # Ici on suppose que les ennemis sont dans "CARTES" > "commune" + "rare" + "epique" + "legendaire"
+    # Pool de cartes ennemies
     cartes = []
     for rarete in ["commune", "rare", "epique", "legendaire"]:
         cartes += data["CARTES"][rarete]
 
-    # Choisir un ennemi au hasard
+    # Tirer un ennemi au hasard
     enemy = random.choice(cartes)
 
-    # Augmenter les stats selon l'arène
+    # Déterminer la rareté
+    rarete = None
+    for r, liste in data["CARTES"].items():
+        if enemy in liste:
+            rarete = r
+            break
+
+    couleur = COULEURS_RARETE[rarete]
+
+    # Créer le dictionnaire de l'ennemi avec stats ajustées selon l'arène
     ennemi = {
-        "name": enemy["nom"],
-        "hp": enemy["vie"] + (level-1) * 2,    # exemple : +2 HP par arène
-        "atk": enemy["attaque"] + (level-1)     # exemple : +1 ATK par arène
+        "name": f"{couleur}{enemy['nom']}{RESET}",
+        "hp": enemy["vie"] + (arene-1)*3,       # +3 PV par arène
+        "atk": enemy["attaque"] + (arene-1)*3,  # +3 ATK par arène
+        "rarete": f"{couleur}{rarete}{RESET}"
     }
 
     return ennemi

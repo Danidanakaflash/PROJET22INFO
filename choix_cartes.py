@@ -7,8 +7,32 @@ def charger_cartes(path="DATA/cartes.json"):
     return data["CARTES"]
 
 def choisir_sans_doublon(pool, exclus):
-    dispo = [c for c in pool if c["nom"] not in exclus]
+
+    dispo = []
+    for carte in pool:
+        nom = carte["nom"]
+        est_exclue = False
+
+        # Vérifie si la carte doit être exclue
+        for exclu in exclus:
+            if nom == exclu:
+                est_exclue = True
+
+        # Ajoute si autorisé
+        if not est_exclue:
+            dispo.append(carte)
+
+    # On suppose qu'au moins une carte est disponible
     return random.choice(dispo)
+
+# Couleurs par rareté
+COLORS = {
+    "commune": "\033[94m",      # bleu
+    "rare": "\033[38;5;208m",   # orange
+    "epique": "\033[95m",       # violet
+    "legendaire": "\033[91m"    # rouge
+}
+RESET = "\033[0m"
 
 def proposer_3_cartes(path="DATA/cartes.json", seed=None):
     if seed is not None:
@@ -16,7 +40,6 @@ def proposer_3_cartes(path="DATA/cartes.json", seed=None):
 
     cartes = charger_cartes(path)
 
-    # Pools selon rareté
     pool1 = cartes["commune"]
     pool2 = cartes["commune"] + cartes["rare"]
     pool3 = cartes["commune"] + cartes["rare"] + cartes["epique"] + cartes["legendaire"]
@@ -31,22 +54,21 @@ def proposer_3_cartes(path="DATA/cartes.json", seed=None):
 
     choix3 = choisir_sans_doublon(pool3, exclus)
 
-# Déterminer rareté
-    def rarete_de(carte):
+    # Trouver la rareté d'une carte
+    def rarete_de(c):
         for r in cartes:
-         if carte in cartes[r]:
-            return r
+            if c in cartes[r]:
+                return r
 
     r1 = rarete_de(choix1)
     r2 = rarete_de(choix2)
     r3 = rarete_de(choix3)
 
-# Construire la chaîne à afficher
+    # Affichage final : nom en couleur, rareté à la fin en couleur
     resultat = (
-        f"1 = {{ '{choix1['nom']}', 'attaque' : {choix1['attaque']}, 'vie' : {choix1['vie']} }} {r1}\n"
-        f"2 = {{ '{choix2['nom']}', 'attaque' : {choix2['attaque']}, 'vie' : {choix2['vie']} }} {r2}\n"
-        f"3 = {{ '{choix3['nom']}', 'attaque' : {choix3['attaque']}, 'vie' : {choix3['vie']} }} {r3}"
-)
+        f"1 = {COLORS[r1]}{choix1['nom']}{RESET}, attaque : {choix1['attaque']}, vie : {choix1['vie']}, rareté : {COLORS[r1]}{r1}{RESET}\n"
+        f"2 = {COLORS[r2]}{choix2['nom']}{RESET}, attaque : {choix2['attaque']}, vie : {choix2['vie']}, rareté : {COLORS[r2]}{r2}{RESET}\n"
+        f"3 = {COLORS[r3]}{choix3['nom']}{RESET}, attaque : {choix3['attaque']}, vie : {choix3['vie']}, rareté : {COLORS[r3]}{r3}{RESET}"
+    )
 
-# Renvoie le texte + la liste des cartes choisies
     return resultat, [choix1, choix2, choix3]
