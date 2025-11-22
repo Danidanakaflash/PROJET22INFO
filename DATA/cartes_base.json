@@ -34,7 +34,7 @@
   "COFFRES":
   {
     "coffre_or": [
-      {"nom": "Cabane de gobelins","type": "batiment","rarete": "rare",},
+      {"nom": "Cabane de gobelins","type": "batiment","rarete": "rare"},
       {"nom": "Heal potion","type": "sort", "rarete": "rare"},
       {"nom": "Tour de l'Enfer", "type": "batiment", "rarete": "legendaire"}
     ],

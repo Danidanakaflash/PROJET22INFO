@@ -4,19 +4,13 @@ def bonus_par_arene(arene):
     return arene
 
 # Les sorts
-def Poison(carte, ennemi, combat_state, arene=0):
-    dmg = 6 + 2*bonus_par_arene(arene)
-    ennemi['poison'] = 3
-    ennemi['poison_dmg'] = dmg
-    print(f'Poison : {dmg} dégâts par tour pendant 3 tours !')
-
-def Heal_potion(carte, ennemi, combat_state, arene=0):
-    heal = 12 + 2*bonus_par_arene(arene)
-    combat_state['heal'] = heal
-    print(f'Heal Potion : tu récupères {heal} PV !')
+def Soin(carte, ennemi, combat_state, arene=0):
+    soin = 12 + 2*bonus_par_arene(arene)
+    combat_state['heal'] = soin
+    print(f'Soin : tu récupères {soin} PV !')
 
 def Foudre(carte, ennemi, combat_state, arene=0):
-    dmg = 15 + 2*bonus_par_arene(arene)
+    dmg = 16 + 2*bonus_par_arene(arene)
     ennemi['hp'] -= dmg
     print(f'Foudre : {dmg} dégâts instantanés !')
 
@@ -40,7 +34,7 @@ def Mortier(carte, ennemi, combat_state, arene=0):
     print(f'Mortier : +{bonus} ATK chaque tour.')
 
 def Tesla(carte, ennemi, combat_state, arene=0):
-    bonus = 3 + bonus_par_arene(arene)
+    bonus = 4 + bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     ennemi['atk'] = max(0, ennemi['atk']//2)
     print(f' Tesla : +{bonus} ATK et l\'ennemi perd 50% d\'attaque.')
@@ -72,8 +66,7 @@ def creer_etat_combat():
 
 # faire le dictionnaire
 CAPACITES = {
-    'Poison': Poison,
-    'Heal potion': Heal_potion,
+    'Soin': Soin,
     'Foudre': Foudre,
     'Rage': Rage,
     'Roquette': Roquette,

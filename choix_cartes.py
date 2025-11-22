@@ -66,9 +66,9 @@ def proposer_3_cartes(path="DATA/cartes.json", seed=None):
 
     # Affichage final : nom en couleur, rareté à la fin en couleur
     resultat = (
-        f"1 = {COLORS[r1]}{choix1['nom']}{RESET}, attaque : {choix1['attaque']}, vie : {choix1['vie']}, rareté : {COLORS[r1]}{r1}{RESET}\n"
-        f"2 = {COLORS[r2]}{choix2['nom']}{RESET}, attaque : {choix2['attaque']}, vie : {choix2['vie']}, rareté : {COLORS[r2]}{r2}{RESET}\n"
-        f"3 = {COLORS[r3]}{choix3['nom']}{RESET}, attaque : {choix3['attaque']}, vie : {choix3['vie']}, rareté : {COLORS[r3]}{r3}{RESET}"
+        f"1 = {COLORS[r1]}{choix1['nom']}{RESET}, vie : {choix1['vie']}, attaque : {choix1['attaque']}, rareté : {COLORS[r1]}{r1}{RESET}\n"
+        f"2 = {COLORS[r2]}{choix2['nom']}{RESET}, vie : {choix2['vie']}, attaque : {choix2['attaque']}, rareté : {COLORS[r2]}{r2}{RESET}\n"
+        f"3 = {COLORS[r3]}{choix3['nom']}{RESET}, vie : {choix3['vie']}, attaque : {choix3['attaque']},rareté : {COLORS[r3]}{r3}{RESET}"
     )
 
     return resultat, [choix1, choix2, choix3]
