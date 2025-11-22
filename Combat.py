@@ -20,11 +20,6 @@ def appliquer_effets(carte_hp, ennemi, combat_state):
         degats = combat_state.get('poison_dmg',0)
         ennemi['hp'] -= degats
         print(f"Poison : {degats} dégâts infligés à l'ennemi !")
-    gele = False
-    if ennemi.get('gel',0) > 0:
-        ennemi['gel'] -= 1
-        gele = True
-        print("L'ennemi est gele et ne peut pas attaquer ce tour !")
 
     return carte_hp, ennemi, gele
 

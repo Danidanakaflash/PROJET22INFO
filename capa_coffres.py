@@ -4,10 +4,6 @@ def bonus_par_arene(arene):
     return arene
 
 # Les sorts
-def Gel(carte, ennemi, combat_state, arene=0):
-    ennemi['gel'] = 1
-    print("L'ennemi est gelé pour un tour !")
-
 def Poison(carte, ennemi, combat_state, arene=0):
     dmg = 6 + 2*bonus_par_arene(arene)
     ennemi['poison'] = 3
@@ -62,11 +58,6 @@ def Cabane_de_gobelins(carte, ennemi, combat_state, arene=0):
     combat_state['bonus_atk'] += bonus
     print(f'Cabane : +{bonus} ATK, 3 gobelins t\'aident.')
 
-def Pierre_tombale(carte, ennemi, combat_state, arene=0):
-    dmg = 5 + bonus_par_arene(arene)
-    combat_state['tombstone'] = dmg
-    print(f'Pierre tombale : si tu meurs, un squelette inflige {dmg} dégâts.')
-
 # Crée un état de combat initial
 def creer_etat_combat():
     return {
@@ -75,15 +66,12 @@ def creer_etat_combat():
         'inferno':1.0,
         'poison':0,
         'poison_dmg':0,
-        'gel':0,
         'heal':0,
-        'tombstone':0,
         'tour_enfer_bonus': None
     }
 
 # faire le dictionnaire
 CAPACITES = {
-    'Gel': Gel,
     'Poison': Poison,
     'Heal potion': Heal_potion,
     'Foudre': Foudre,
@@ -94,6 +82,5 @@ CAPACITES = {
     'Tesla': Tesla,
     "Tour de l'Enfer": Tour_de_l_Enfer,
     'Cabane de gobelins': Cabane_de_gobelins,
-    'Pierre tombale': Pierre_tombale,
 }
 
