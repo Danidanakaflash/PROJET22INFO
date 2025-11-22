@@ -1,5 +1,4 @@
 import json
-import os
 
 SAVE_PATH = "../Cartes/save.json"
 

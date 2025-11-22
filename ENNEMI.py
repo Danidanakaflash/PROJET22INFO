@@ -37,8 +37,8 @@ def get_random_enemy(arene, path="DATA/cartes_base.json"):
     # Créer le dictionnaire de l'ennemi avec stats ajustées selon l'arène, commence plus bas que nos cartes
     ennemi = {
         "name": f"{couleur}{enemy['nom']}{RESET}",
-        "hp": enemy["vie"] -2 + (arene-1)*4,       # +4 PV par arène
-        "atk": enemy["attaque"] -1 + (arene-1)*4,  # +4 ATK par arène
+        "hp": enemy["vie"] -2 + (arene-1)*5,       # +5 PV par arène
+        "atk": enemy["attaque"] -1 + (arene-1)*5,  # +5 ATK par arène
         "rarete": f"{couleur}{rarete}{RESET}"
     }
 
