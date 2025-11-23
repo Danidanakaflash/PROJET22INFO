@@ -1,5 +1,6 @@
 import random
 import json
+from gestion_joueur import save
 from utils import ask_choice
 
 # Prix associés à chaque coffre
@@ -29,13 +30,13 @@ def tirer_carte(coffre):
     return random.choice(coffre)
 
 # Boutique REELLE utilisée par le jeu
-def boutique(couronnes):
+def boutique(joueur):
 
     inventaire = []
     coffres = charger_coffres("DATA/cartes.json")
 
     while True:
-        print(f"\n Couronnes disponibles : 👑 {couronnes} 👑")
+        print(f"\nCouronnes disponibles : 👑 {joueur["couronnes"]} 👑")
         afficher_boutique()
 
         choix = input("\n👉 Que veux-tu faire ? (1-4) : ")
@@ -48,21 +49,21 @@ def boutique(couronnes):
             nom_coffre = list(prix_coffres.keys())[int(choix) - 1]
             prix = prix_coffres[nom_coffre]
 
-            if couronnes < prix:
+            if joueur["couronnes"] < prix:
                 print("❌ Tu n'as pas assez de couronnes.")
                 continue
 
             carte = tirer_carte(coffres[nom_coffre])
             inventaire.append(carte)
-            couronnes -= prix
+            joueur["couronnes"] -= prix
+            save(joueur)
 
-            print(f"\n Tu as obtenu : {carte['nom']} ({carte['type']}, {carte['rarete']})")
-            print(f" Couronnes restantes : 👑 {couronnes} 👑")
+            print(f"\nTu as obtenu : {carte['nom']} ({carte['type']}, {carte['rarete']})")
 
         else:
             print("❌ Choix invalide.")
 
-    return couronnes, inventaire
+    return joueur["couronnes"], inventaire
 
 
 def charger_cartes():
@@ -86,6 +87,7 @@ def bonus(joueur):
 
     if choix == "1":
         joueur["couronnes"] += 1
+        save(joueur)
         print("Tu gagnes 1 couronne.")
 
     elif choix == "2":

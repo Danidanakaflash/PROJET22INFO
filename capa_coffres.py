@@ -5,9 +5,9 @@ def bonus_par_arene(arene):
 
 # Les sorts
 def Soin(carte, ennemi, combat_state, arene=0):
-    soin = 12 + 2*bonus_par_arene(arene)
-    combat_state['heal'] = soin
-    print(f'Soin : tu récupères {soin} PV !')
+    soin = 20 + 2*bonus_par_arene(arene)
+    carte['vie'] += soin  # ⬅ soin immédiat
+    print(f"Tu récupères {soin} PV immédiatement !")
 
 def Foudre(carte, ennemi, combat_state, arene=0):
     dmg = 16 + 2*bonus_par_arene(arene)
@@ -40,15 +40,12 @@ def Tesla(carte, ennemi, combat_state, arene=0):
     print(f' Tesla : +{bonus} ATK et l\'ennemi perd 50% d\'attaque.')
 
 def Tour_de_l_Enfer(carte, ennemi, combat_state, arene=0):
-    if 'tour_enfer_bonus' not in combat_state:
-        combat_state['tour_enfer_bonus'] = 5 + bonus_par_arene(arene)
-    else:
-        combat_state['tour_enfer_bonus'] *= 1.5
-    combat_state['bonus_atk'] += combat_state['tour_enfer_bonus']
-    print(f'Tour de l\'Enfer : +{combat_state["tour_enfer_bonus"]:.1f} ATK ce tour (x1,5 chaque tour)')
+    bonus =  8 + 2 * bonus_par_arene(arene)
+    combat_state['bonus_atk'] += bonus
+    print(f' Tour de l\'enfer : +{bonus} ATK chaque tour.')
 
 def Cabane_de_gobelins(carte, ennemi, combat_state, arene=0):
-    bonus = 4 + bonus_par_arene(arene)
+    bonus = 7 + bonus_par_arene(arene)
     combat_state['bonus_atk'] += bonus
     print(f'Cabane : +{bonus} ATK, 3 gobelins t\'aident.')
 
@@ -57,13 +54,8 @@ def creer_etat_combat():
     return {
         'bonus_atk':0,
         'rage':1.0,
-        'inferno':1.0,
-        'poison':0,
-        'poison_dmg':0,
         'heal':0,
-        'tour_enfer_bonus': None
     }
-
 # faire le dictionnaire
 CAPACITES = {
     'Soin': Soin,

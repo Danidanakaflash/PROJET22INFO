@@ -7,7 +7,6 @@ def creer_etat_combat(): #État temporaire du combat pour bonus et effets de sor
         'rage': 1.0,
         'inferno': 1.0,
         'heal': 0,
-        'tour_enfer_bonus': None
     }
 
 def calculer_degats_joueur(base_atk, combat_state): #Calcule les dégâts infligés par la carte du joueur
@@ -87,6 +86,7 @@ def combat(carte, ennemi, bonus_possedes, arene=0):
                 print(f"Tu poses : {bat['nom']}")
                 batiments_actifs.append(bat)
                 batiments.remove(bat)
+                bonus_possedes.remove(bat)
                 action_faite = True
 
         # Attaque de l'ennemi
@@ -94,12 +94,7 @@ def combat(carte, ennemi, bonus_possedes, arene=0):
             carte_hp -= ennemi['atk']
             print(f"L'ennemi t'inflige {ennemi['atk']} dégâts.")
 
-        # Soin éventuel
-        heal = combat_state.get('heal', 0)
-        if heal > 0:
-            print(f"Tu récupères {heal} PV !")
-            carte_hp += heal
-            combat_state['heal'] = 0
+
 
     # Retourne True si le joueur survit, False sinon
     return carte_hp > 0

@@ -79,7 +79,7 @@ def game_loop():
             rep = ask_choice(["1", "2"])
 
             if rep == "1":
-                couronnes, nouveaux_bonus = boutique(joueur["couronnes"])
+                couronnes, nouveaux_bonus = boutique(joueur)
                 bonus_possedes.extend(nouveaux_bonus)
                 #ajoute les éléments d'une liste à une autre
 
@@ -88,10 +88,9 @@ def game_loop():
 
         # Fin de l'arène → passage à la suivante
         if joueur["couronnes"] > 0:
-            print(f"\n=== Tu as terminé l'arène {["arene"]} ! ===")
+            print(f"\n=== Tu as terminé l'arène {joueur["arene"]} ===")
             joueur["arene"] += 1
             save({"couronnes": ["couronnes"], "arene": ["arene"]})
-            press_enter()
 
 
 # Appel de la boucle principale

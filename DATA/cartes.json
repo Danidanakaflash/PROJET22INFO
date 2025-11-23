@@ -4,118 +4,118 @@
             {
                 "nom": "Gang de gobelins",
                 "attaque": 7,
-                "vie": 24
+                "vie": 23
             },
             {
                 "nom": "Archers",
                 "attaque": 8,
-                "vie": 23
+                "vie": 22
             },
             {
                 "nom": "Chevalier",
                 "attaque": 9,
-                "vie": 25
+                "vie": 24
             },
             {
                 "nom": "Horde de gargouilles",
                 "attaque": 7,
-                "vie": 24
+                "vie": 23
             },
             {
                 "nom": "Barbares",
                 "attaque": 8,
-                "vie": 25
+                "vie": 24
             },
             {
                 "nom": "Recrues royales",
                 "attaque": 7,
-                "vie": 26
+                "vie": 25
             },
             {
                 "nom": "Squelettes",
                 "attaque": 6,
-                "vie": 23
+                "vie": 22
             },
             {
                 "nom": "Esprit de glace",
                 "attaque": 7,
-                "vie": 24
+                "vie": 23
             },
             {
                 "nom": "Artificière",
                 "attaque": 8,
-                "vie": 25
+                "vie": 24
             }
         ],
         "rare": [
             {
                 "nom": "Sorcier de feu",
                 "attaque": 8,
-                "vie": 26
+                "vie": 25
             },
             {
                 "nom": "Mini Pekka",
                 "attaque": 9,
-                "vie": 27
+                "vie": 26
             },
             {
                 "nom": "Valkyrie",
                 "attaque": 8,
-                "vie": 28
+                "vie": 27
             },
             {
                 "nom": "Chevaucheur de cochon",
                 "attaque": 9,
-                "vie": 27
+                "vie": 26
             },
             {
                 "nom": "Mousquetaire",
                 "attaque": 8,
-                "vie": 26
+                "vie": 25
             },
             {
                 "nom": "Gobelin à sarbacane",
                 "attaque": 9,
-                "vie": 25
+                "vie": 24
             }
         ],
         "epique": [
             {
                 "nom": "Prince",
                 "attaque": 9,
-                "vie": 28
+                "vie": 27
             },
             {
                 "nom": "Géant squelette",
                 "attaque": 8,
-                "vie": 29
+                "vie": 28
             },
             {
                 "nom": "Sorcière",
                 "attaque": 10,
-                "vie": 27
+                "vie": 26
             },
             {
                 "nom": "Dragon électrique",
                 "attaque": 9,
-                "vie": 28
+                "vie": 27
             }
         ],
         "legendaire": [
             {
                 "nom": "Phoenix",
                 "attaque": 10,
-                "vie": 30
+                "vie": 29
             },
             {
                 "nom": "Fantôme",
                 "attaque": 12,
-                "vie": 29
+                "vie": 28
             },
             {
                 "nom": "Méga-chevalier",
                 "attaque": 11,
-                "vie": 31
+                "vie": 30
             }
         ]
     },
@@ -127,7 +127,7 @@
                 "rarete": "rare"
             },
             {
-                "nom": "Heal potion",
+                "nom": "Soin",
                 "type": "sort",
                 "rarete": "rare"
             },
