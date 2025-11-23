@@ -4,7 +4,6 @@ import random
 def get_random_enemy(arene, path="DATA/cartes_base.json"):
     #Tire un ennemi aléatoire dans le JSON, détermine sa rareté,colore son nom et sa rareté, et augmente ses stats selon l'arène.
 
-    # Codes ANSI pour couleurs selon rareté
     COULEURS_RARETE = {
         "commune": "\033[94m",    # bleu
         "rare": "\033[38;5;208m",       # orange

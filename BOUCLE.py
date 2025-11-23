@@ -23,7 +23,6 @@ def game_loop():
     # Inventaire des bonus acquis
     bonus_possedes = []
 
-    # Boucle infinie d'arènes
     while True:
 
         print(f"\n=== Arène {joueur["arene"]} ===")
@@ -42,14 +41,14 @@ def game_loop():
             print("\nChoisis une carte :")
             print(texte)
 
-            # 3. Demander le choix du joueur
+            # 3. Demander choix
             choix = ask_choice(["1", "2", "3"])
             carte_choisie = cartes[int(choix) - 1]
 
-            # 4. Combat avec possibilité d'utiliser un bonus
+            # 4. Combat avec bonus
             vivant = combat(carte_choisie, ennemi, bonus_possedes)
 
-            if not vivant:
+            if not vivant:  # si tu meurs
                 print("\n===== DÉFAITE =====")
                 print(f"Tu as atteint l'arène {joueur["arene"]}.")
                 print(f"Tu as gagné {joueur["combats_gagnes_total"]} combats au total.")
@@ -72,7 +71,7 @@ def game_loop():
             #bonus supplémentaire à choisir :
             bonus(joueur)
 
-            # 6. Aller à la boutique ?
+            # 6. boutique
             print("\nSouhaites-tu aller à la boutique ?")
             print("1. Oui")
             print("2. Non")
@@ -91,7 +90,6 @@ def game_loop():
             print(f"\n=== Tu as terminé l'arène {joueur["arene"]} ===")
             joueur["arene"] += 1
             save({"couronnes": ["couronnes"], "arene": ["arene"]})
-
 
 # Appel de la boucle principale
 if __name__ == "__main__":

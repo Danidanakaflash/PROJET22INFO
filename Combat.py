@@ -94,7 +94,5 @@ def combat(carte, ennemi, bonus_possedes, arene=0):
             carte_hp -= ennemi['atk']
             print(f"L'ennemi t'inflige {ennemi['atk']} dégâts.")
 
-
-
     # Retourne True si le joueur survit, False sinon
     return carte_hp > 0
